@@ -1,0 +1,54 @@
+---
+title: "Thurs_Inclass"
+author: "Kimberly Orantes"
+date: "11/18/2021"
+output: html_document
+---
+
+# This is a quick-turn challenge.  It relates to Question 2 of Quiz 8 in our course. Take a look at that quiz question and then.
+
+## The researchers wanted to know if the spiders could run faster, on average, without the hindrance of a pedipalp
+
+### Finish this writeUp and knit the result to a pdf file.  
+
+
+### Then add this to your github account and turn it in by emailing me the link to it in your github account,
+
+
+
+```{r, message=FALSE}
+require(tidyverse)
+require(tigerstats)
+require(abd)
+data("SpiderSpeed")
+```
+
+```{r, eval=TRUE}
+#mydata <- gather(SpiderSpeed, variable, value) 
+dat <- gather(SpiderSpeed, BorA, speed)
+```
+
+
+# Plot
+
+```{r}
+boxplot(speed~BorA,data=dat, main="After v. Before")
+```
+
+The boxplot shows that the spiders' speed.after is higher than speed.before. This means that the spiders' speed is faster after their pedipalp was removed than before their pedipalp was removed.  
+    
+# Numerical Results
+
+```{r}
+favstats(speed~BorA,data=dat)
+```
+
+These results show that the average speed after the amputation is about 3.85 and the average speed before the amputation is about 2.67. Therefore the speed of the spiders' after the pedipalp amputation is greater on average than the spiders' speed before the amputation of pedipalp.  
+    
+# Inferential Results
+
+```{r}
+t.test(speed~BorA,data=dat)
+```
+
+The Welch Two Sample t-test shows that we can reject the null hypothesis of there being no significant difference in the spiders' speed before or after the pedipalp amputation. The p-value is 0.0004611 which is lower than 0.5 therefore there is a significant difference in the spiders' speed before and after the amputation. The 95% confidence interval is from 0.5778826 to 1.7933674. 
